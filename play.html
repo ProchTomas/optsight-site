@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Beat the bots — OptSight playground</title>
+  <meta name="description" content="A simulated, fictional market game: split €10,000 across four assets and race three strategy bots, rebalancing as it plays. Entertainment only — not investment advice." />
+
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <meta name="theme-color" content="#070910" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ─────────────── AMBIENT BACKGROUND ─────────────── -->
+  <div class="fx" aria-hidden="true">
+    <div class="fx__glow"></div>
+    <div class="fx__grain"></div>
+    <div class="fx__scan"></div>
+    <div class="fx__vignette"></div>
+  </div>
+
+  <!-- ───────────────────────── NAV ───────────────────────── -->
+  <header class="nav" id="nav">
+    <div class="nav__inner">
+      <a class="brand" href="index.html" aria-label="OptSight home">
+        <img class="logo-gif" src="assets/animated_logo_loop.gif" alt="" width="400" height="400" aria-hidden="true" loading="eager" decoding="async" />
+        <span class="brand__name">Opt<span class="brand__accent">Sight</span></span>
+      </a>
+      <nav class="nav__links" aria-label="Primary">
+        <a href="index.html#capabilities">Capabilities</a>
+        <a href="algorithms.html">Algorithms</a>
+        <a href="index.html#pricing">Pricing</a>
+        <a href="index.html#legal">Legal</a>
+      </nav>
+      <a href="index.html" class="btn btn--ghost btn--sm">← Back to site</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="section play2-wrap">
+      <div class="section__head">
+        <p class="eyebrow">Play · simulated</p>
+        <h1>Beat the bots</h1>
+        <p class="section__lead">
+          Split <strong>€10,000</strong> across four made-up assets and play the market forward.
+          Three bots rebalance on their own rules as it runs; <strong>pause any time to rebalance
+          yourself</strong>. Same seed, same market — share the link and challenge a friend.
+        </p>
+      </div>
+
+      <div class="play2" id="play-app">
+        <div class="play2__board">
+          <canvas class="play2__canvas" aria-label="Live equity race chart"></canvas>
+          <div class="play2__hud">
+            <span class="play2__session">Session 0</span>
+            <span class="play2__seed">SEED</span>
+          </div>
+        </div>
+
+        <div class="play2__scoreboard">
+          <table class="score-tbl">
+            <thead>
+              <tr><th></th><th class="sc-name">Strategy</th><th>Value</th><th>Return</th><th>Max DD</th></tr>
+            </thead>
+            <tbody class="play2__score"></tbody>
+          </table>
+          <p class="play2__note"></p>
+        </div>
+
+        <div class="play2__controls">
+          <button type="button" class="btn btn--primary btn--sm" data-act="play">Play</button>
+          <button type="button" class="btn btn--ghost btn--sm" data-act="step">Step</button>
+          <button type="button" class="btn btn--ghost btn--sm" data-act="skip">Skip to end</button>
+          <button type="button" class="btn btn--ghost btn--sm" data-act="restart">Restart</button>
+          <span class="play2__spacer"></span>
+          <button type="button" class="btn btn--ghost btn--sm" data-act="new">New market</button>
+          <button type="button" class="btn btn--ghost btn--sm" data-act="copy">Copy link</button>
+        </div>
+
+        <div class="play2__cols">
+          <div class="play2__col">
+            <div class="play2__panel-head"><span class="play__title">Your allocation</span></div>
+            <div class="play__alloc"></div>
+            <p class="play2__hint"></p>
+          </div>
+          <div class="play2__col">
+            <div class="play2__panel-head"><span class="play__title">Live allocations</span></div>
+            <div class="play2__legend"></div>
+            <div class="play2__bots"></div>
+            <p class="play2__method">
+              The <strong>OptSight</strong> bot here is only the core idea — equal-risk-contribution
+              risk parity on a short window. The real app goes well beyond it: the full solver over
+              much more history, working alongside its machine-learning signals. That combination is
+              where OptSight’s real edge lives — a simplified game bot can’t stand in for it.
+            </p>
+          </div>
+        </div>
+
+        <p class="play__disclaimer">
+          Simulated, fictional assets on random data — for entertainment only. Not investment
+          advice, not a forecast, and not a result you can expect. The bots follow fixed rules;
+          the risk-parity (“OptSight”) bot is <strong>not</strong> designed to win, and beats or
+          loses to the others depending on the seed.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <!-- ───────────────────────── FOOTER ───────────────────────── -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <span class="logo-mark"></span>
+        <span class="brand__name">Opt<span class="brand__accent">Sight</span></span>
+      </div>
+      <p class="footer__disclaimer">
+        For informational purposes only. Not financial advice. OptSight is portfolio tooling —
+        not a broker, exchange, or investment adviser. Investing involves risk, including the
+        possible loss of capital.
+      </p>
+      <p class="footer__links">
+        <a href="index.html#legal">Terms &amp; disclosures</a>
+        <a href="index.html#legal">Privacy</a>
+        <a href="index.html#legal">Refunds</a>
+        <a href="mailto:optsight@gmail.com">optsight@gmail.com</a>
+      </p>
+      <p class="footer__copy">© <span data-year>2026</span> OptSight. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="fx-core.js" defer></script>
+  <script src="sim-core.js" defer></script>
+  <script src="main.js" defer></script>
+  <script src="playground.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>See the algorithms think — OptSight</title>
+  <meta name="description" content="The same engines that run inside OptSight, visualized: risk-parity optimization, the fundamental ranker, and market-neutral funding carry. Interactive, in-browser illustrations — not a track record." />
+
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <meta name="theme-color" content="#070910" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ─────────────── AMBIENT BACKGROUND ─────────────── -->
+  <div class="fx" aria-hidden="true">
+    <div class="fx__glow"></div>
+    <div class="fx__grain"></div>
+    <div class="fx__scan"></div>
+    <div class="fx__vignette"></div>
+  </div>
+
+  <!-- ───────────────────────── NAV ───────────────────────── -->
+  <header class="nav" id="nav">
+    <div class="nav__inner">
+      <a class="brand" href="index.html" aria-label="OptSight home">
+        <img class="logo-gif" src="assets/animated_logo_loop.gif" alt="" width="400" height="400" aria-hidden="true" loading="eager" decoding="async" />
+        <span class="brand__name">Opt<span class="brand__accent">Sight</span></span>
+      </a>
+      <nav class="nav__links" aria-label="Primary">
+        <a href="index.html#capabilities">Capabilities</a>
+        <a href="play.html">Play</a>
+        <a href="index.html#pricing">Pricing</a>
+        <a href="index.html#legal">Legal</a>
+      </nav>
+      <a href="index.html" class="btn btn--ghost btn--sm">← Back to site</a>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- ───────────────────────── ALGORITHMS (algorithm visualizations) ───────────────────────── -->
+    <section class="section" id="algorithms">
+      <div class="section__head reveal">
+        <p class="eyebrow">Algorithms</p>
+        <h1>See the algorithms think</h1>
+        <p class="section__lead">
+          The same engines that run inside OptSight — visualized. Illustrations only, not a track record.
+        </p>
+      </div>
+
+      <div class="viz-rows">
+        <figure class="viz reveal" data-viz="optimize">
+          <div class="viz__stage">
+            <canvas class="viz__canvas" aria-hidden="true"></canvas>
+            <div class="viz__ui"></div>
+          </div>
+          <figcaption class="viz__cap">
+            <p class="eyebrow">Portfolio optimization</p>
+            <h3>Risk, balanced.</h3>
+            <p>
+              Each bubble is a holding; its size is its weight. Held naively at
+              <strong>equal weight</strong>, some names carry far more risk than others —
+              watch the bars spike. <strong>Risk parity</strong> resizes every position so each
+              contributes the same risk. That balancing is the default OptSight runs.
+            </p>
+          </figcaption>
+        </figure>
+
+        <figure class="viz reveal" data-viz="tree">
+          <div class="viz__stage">
+            <canvas class="viz__canvas" aria-hidden="true"></canvas>
+            <div class="viz__ui"></div>
+          </div>
+          <figcaption class="viz__cap">
+            <p class="eyebrow">Fundamental ranker</p>
+            <h3>Screened, not guessed.</h3>
+            <p>
+              Every name drops through the same checks — <strong>valuation</strong>,
+              <strong>profitability</strong>, <strong>momentum</strong> — and lands in an
+              <strong>Add</strong> or <strong>Pass</strong> bin. <em>Add</em> shortlists it into
+              your universe for a closer look, not a buy order. It's a vote across an ensemble of
+              trees, so no single rule decides — never a promise about what a stock will do.
+            </p>
+          </figcaption>
+        </figure>
+
+        <figure class="viz reveal" data-viz="carry">
+          <div class="viz__stage">
+            <canvas class="viz__canvas" aria-hidden="true"></canvas>
+            <div class="viz__ui"></div>
+          </div>
+          <figcaption class="viz__cap">
+            <p class="eyebrow">Funding carry · crypto</p>
+            <h3>Neutral by design.</h3>
+            <p>
+              Equal <strong>long</strong> and <strong>short</strong> keeps the book
+              <strong>market-neutral</strong> — price direction cancels out, and the beam stays
+              level. Every eight hours it settles the perpetual <strong>funding</strong>; a
+              neutrality guard re-balances after any shock. Funding can be paid or received —
+              this shows the mechanism, not a yield.
+            </p>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ───────────────────────── FOOTER ───────────────────────── -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <span class="logo-mark"></span>
+        <span class="brand__name">Opt<span class="brand__accent">Sight</span></span>
+      </div>
+      <p class="footer__disclaimer">
+        For informational purposes only. Not financial advice. OptSight is portfolio tooling —
+        not a broker, exchange, or investment adviser. Investing involves risk, including the
+        possible loss of capital.
+      </p>
+      <p class="footer__links">
+        <a href="index.html#legal">Terms &amp; disclosures</a>
+        <a href="index.html#legal">Privacy</a>
+        <a href="index.html#legal">Refunds</a>
+        <a href="mailto:optsight@gmail.com">optsight@gmail.com</a>
+      </p>
+      <p class="footer__copy">© <span data-year>2026</span> OptSight. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="fx-core.js" defer></script>
+  <script src="main.js" defer></script>
+  <script src="viz.js" defer></script>
+</body>
+</html>

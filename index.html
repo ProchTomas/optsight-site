@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OptSight — Quant-grade portfolio tooling on your own machine</title>
+  <meta name="description" content="OptSight is a private desktop app for portfolio optimization, ML signals, and a local-AI co-pilot. Your data stays on your machine. One-time purchase, no subscription." />
+
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <meta name="theme-color" content="#070910" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="OptSight — portfolio tooling on your own machine" />
+  <meta property="og:description" content="Quant-grade optimization, ML signals, and a private local-AI co-pilot. One-time purchase." />
+  <meta property="og:type" content="website" />
+
+  <!-- Fonts: IBM Plex Sans (body) + IBM Plex Mono (numbers) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ─────────────── AMBIENT BACKGROUND (page-wide, fixed) ─────────────── -->
+  <div class="fx" aria-hidden="true">
+    <div class="fx__glow"></div>
+    <div class="fx__grain"></div>
+    <div class="fx__scan"></div>
+    <div class="fx__vignette"></div>
+  </div>
+
+  <!-- ───────────────────────── NAV ───────────────────────── -->
+  <header class="nav" id="nav">
+    <div class="nav__inner">
+      <a class="brand" href="#top" aria-label="OptSight home">
+        <img class="logo-gif" src="assets/animated_logo_loop.gif" alt="" width="400" height="400" aria-hidden="true" loading="eager" decoding="async" />
+        <span class="brand__name">Opt<span class="brand__accent">Sight</span></span>
+      </a>
+      <nav class="nav__links" aria-label="Primary">
+        <a href="#capabilities">Capabilities</a>
+        <a href="algorithms.html">Algorithms</a>
+        <a href="play.html">Play</a>
+        <a href="#how">How it works</a>
+        <a href="#privacy">Privacy</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#legal">Legal</a>
+      </nav>
+      <a href="#pricing" class="btn btn--primary btn--sm">Buy</a>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- ───────────────────────── HERO ───────────────────────── -->
+    <section class="hero">
+      <div class="hero__content reveal">
+        <p class="eyebrow"><span class="typed" data-text="Desktop · Local · Private"></span><span class="caret" aria-hidden="true"></span></p>
+        <h1 class="hero__title">
+          See your portfolio<br /><span class="accent">clearly.</span>
+        </h1>
+        <p class="hero__sub">
+          OptSight is a quant-grade desktop workbench — portfolio optimization,
+          machine-learning signals, and a private local-AI co-pilot — running
+          entirely on your own machine. No accounts. No cloud. No subscription.
+        </p>
+        <div class="hero__cta">
+          <!-- PLACEHOLDER: wire to checkout URL (Gumroad / Lemon Squeezy / Stripe link) -->
+          <a href="#pricing" class="btn btn--primary" data-cta="buy">Buy OptSight</a>
+          <a href="https://github.com/ProchTomas/optsight-releases/releases/latest"
+             class="btn btn--ghost" rel="noopener">Download</a>
+        </div>
+        <p class="hero__note">Windows &amp; macOS · one-time purchase</p>
+      </div>
+    </section>
+
+    <!-- ───────────────────────── CAPABILITIES ───────────────────────── -->
+    <section class="section" id="capabilities">
+      <div class="section__head reveal">
+        <p class="eyebrow">Capabilities</p>
+        <h2>Everything in one local workbench</h2>
+        <p class="section__lead">
+          A full quant pipeline — from data to optimization to execution — without
+          handing your strategy or holdings to anyone.
+        </p>
+      </div>
+
+      <div class="cards">
+        <article class="card reveal">
+          <span class="card__icon" data-icon="optimize" aria-hidden="true"></span>
+          <h3>Portfolio optimization</h3>
+          <p>Risk-parity by default, plus classic mean–variance and other objectives.
+             Set constraints, generate target weights, and see the diff against where you are today.</p>
+        </article>
+
+        <article class="card reveal">
+          <span class="card__icon" data-icon="signal" aria-hidden="true"></span>
+          <h3>Machine-learning signals</h3>
+          <p>Regime detection, sentiment and trend models, and a fundamentals ranker —
+             trained and run locally to inform your views.</p>
+        </article>
+
+        <article class="card reveal">
+          <span class="card__icon" data-icon="ai" aria-hidden="true"></span>
+          <h3>Local-AI co-pilot</h3>
+          <p>“Consult” chats with a model running on your machine, grounded in your own
+             portfolio data and documents. Optional, opt-in web lookups when you want them.</p>
+        </article>
+
+        <article class="card reveal">
+          <span class="card__icon" data-icon="broker" aria-hidden="true"></span>
+          <h3>Broker integration</h3>
+          <p>Connect your own accounts, review a proposed rebalance, and place orders on your terms.</p>
+          <ul class="card__brokers">
+            <li><span class="card__brokers-cat">Stocks</span> Interactive Brokers · Trading 212</li>
+            <li><span class="card__brokers-cat">Crypto</span> Binance · Kraken</li>
+          </ul>
+        </article>
+
+        <article class="card reveal">
+          <span class="card__icon" data-icon="analytics" aria-hidden="true"></span>
+          <h3>Performance analytics</h3>
+          <p>Track realized returns, drawdowns, and benchmark regression (alpha / beta) on
+             your actual trade history — imported or recorded as you go.</p>
+        </article>
+
+        <article class="card reveal">
+          <span class="card__icon" data-icon="pool" aria-hidden="true"></span>
+          <h3>Opinion pooling</h3>
+          <p>Blend the optimizer’s output with your own views and credibility, so the final
+             weights reflect both the model and your judgment.</p>
+        </article>
+
+        <article class="card reveal">
+          <span class="card__icon" data-icon="guard" aria-hidden="true"></span>
+          <h3>Guarded auto-execute</h3>
+          <p>Optional and off by default. When enabled, hard guards apply — paper-mode default,
+             per-order size caps, daily trade limits, market-hours only.</p>
+        </article>
+
+        <article class="card reveal">
+          <span class="card__icon" data-icon="lock" aria-hidden="true"></span>
+          <h3>Local &amp; private</h3>
+          <p>Everything lives in a local database on your computer. No sign-up, no telemetry of
+             your holdings, nothing leaves your machine unless you explicitly ask it to.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ───────────────────────── ALGORITHMS (teaser → dedicated page) ───────────────────────── -->
+    <section class="section" id="algorithms">
+      <div class="section__head reveal">
+        <p class="eyebrow">Algorithms</p>
+        <h2>See the algorithms think</h2>
+        <p class="section__lead">
+          The same engines that run inside OptSight — risk-parity optimization, the fundamental
+          ranker, and market-neutral funding carry — visualized. Illustrations only, not a track record.
+        </p>
+        <p class="play-teaser__cta">
+          <a href="algorithms.html" class="btn btn--primary">See the algorithms →</a>
+        </p>
+        <p class="play-teaser__fine">Illustrations of the mechanism only — not a forecast or a track record.</p>
+      </div>
+    </section>
+
+    <!-- ───────────────────────── PLAY (teaser → dedicated page) ───────────────────────── -->
+    <section class="section section--alt" id="play">
+      <div class="section__head reveal">
+        <p class="eyebrow">Play</p>
+        <h2>Beat the bots</h2>
+        <p class="section__lead">
+          A tiny simulated market game: split €10,000 across four made-up assets and race three
+          strategy bots — including a risk-parity bot — rebalancing as it plays out over time.
+          Same seed, same market: share the link and challenge a friend.
+        </p>
+        <p class="play-teaser__cta">
+          <a href="play.html" class="btn btn--primary">Open the playground →</a>
+        </p>
+        <p class="play-teaser__fine">Simulated &amp; fictional — entertainment only, not investment advice.</p>
+      </div>
+    </section>
+
+    <!-- ───────────────────────── HOW IT WORKS ───────────────────────── -->
+    <section class="section" id="how">
+      <div class="section__head reveal">
+        <p class="eyebrow">How it works</p>
+        <h2>Three steps, on your desktop</h2>
+      </div>
+
+      <ol class="steps">
+        <li class="step reveal">
+          <span class="step__num">01</span>
+          <h3>Build your portfolio</h3>
+          <p>Define your universe and holdings, pull market data locally, and let the models
+             surface signals and regimes.</p>
+        </li>
+        <li class="step reveal">
+          <span class="step__num">02</span>
+          <h3>Optimize &amp; consult</h3>
+          <p>Generate target weights, blend in your own views, and talk through the result with
+             the local-AI co-pilot.</p>
+        </li>
+        <li class="step reveal">
+          <span class="step__num">03</span>
+          <h3>Review &amp; execute</h3>
+          <p>Inspect the rebalance diff, then place orders through your broker — manually, or with
+             guarded auto-execute when you opt in.</p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ───────────────────────── WHAT YOU'LL NEED (bring your own keys) ───────────────────────── -->
+    <section class="section section--alt" id="prepare">
+      <div class="section__head reveal">
+        <p class="eyebrow">Before you start</p>
+        <h2>Bring your own keys</h2>
+        <p class="section__lead">
+          OptSight connects to <strong>your own</strong> data and accounts — you supply the keys and
+          they stay on your machine. Most are free to create. Here's what to have ready; connect only
+          what you use.
+        </p>
+      </div>
+
+      <div class="keys">
+        <article class="keygroup reveal">
+          <p class="keygroup__label">Market data</p>
+          <ul>
+            <li><span class="keygroup__name">Tiingo</span><span class="keygroup__note">Prices &amp; news · free tier — the easy way to start</span></li>
+            <li><span class="keygroup__name">Financial Modeling Prep</span><span class="keygroup__note">Prices, fundamentals &amp; news</span></li>
+            <li><span class="keygroup__name">Alpha Vantage</span><span class="keygroup__note">Prices, fundamentals &amp; news</span></li>
+          </ul>
+          <p class="keygroup__foot">Prices fall back across providers automatically; the fundamental ranker uses FMP or Alpha Vantage.</p>
+        </article>
+
+        <article class="keygroup reveal">
+          <p class="keygroup__label">Brokers &amp; exchanges</p>
+          <ul>
+            <li><span class="keygroup__name">Interactive Brokers</span><span class="keygroup__note">Client Portal Gateway · your IBKR login, no API key</span></li>
+            <li><span class="keygroup__name">Trading 212</span><span class="keygroup__note">API key + secret</span></li>
+            <li><span class="keygroup__name">Binance</span><span class="keygroup__note">API key + secret</span></li>
+            <li><span class="keygroup__name">Kraken</span><span class="keygroup__note">API key + secret</span></li>
+          </ul>
+        </article>
+
+        <article class="keygroup reveal">
+          <p class="keygroup__label">Local-AI co-pilot</p>
+          <ul>
+            <li><span class="keygroup__name">Ollama</span><span class="keygroup__note">Local model runtime · runs on your machine, no key</span></li>
+            <li><span class="keygroup__name">Tavily</span><span class="keygroup__note">Optional · opt-in web lookups for Consult</span></li>
+          </ul>
+        </article>
+
+        <article class="keygroup reveal">
+          <p class="keygroup__label">Notifications</p>
+          <ul>
+            <li><span class="keygroup__name">Discord</span><span class="keygroup__note">Optional · webhook URL</span></li>
+            <li><span class="keygroup__name">Telegram</span><span class="keygroup__note">Optional · bot token + chat ID</span></li>
+          </ul>
+          <p class="keygroup__foot">Get a message when a rebalance or an auto-execute run finishes. Both are opt-in and independent.</p>
+        </article>
+      </div>
+
+      <p class="keys__fine">Every key is stored in your local config and never leaves your machine.</p>
+    </section>
+
+    <!-- ───────────────────────── PRIVACY ───────────────────────── -->
+    <section class="section" id="privacy">
+      <div class="privacy reveal">
+        <div class="privacy__text">
+          <p class="eyebrow">Privacy by architecture</p>
+          <h2>Your strategy never leaves your machine</h2>
+          <p>
+            OptSight isn’t a web service with a desktop skin — it’s a genuinely local
+            application. Your holdings, models, and chats live in a database on your computer.
+            The AI co-pilot runs locally. The only time anything goes out is an
+            <strong>opt-in</strong> web lookup you trigger yourself — and even then, only your
+            typed question is sent, never your portfolio.
+          </p>
+          <ul class="ticks">
+            <li>No account, no login, no cloud sync</li>
+            <li>Local database &amp; local model runtime</li>
+            <li>Opt-in web access, clearly indicated</li>
+            <li>One-time purchase — you own your copy</li>
+          </ul>
+        </div>
+        <div class="privacy__mark" aria-hidden="true">
+          <span class="logo-mark logo-mark--xl"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ───────────────────────── SCREENSHOTS ───────────────────────── -->
+    <section class="section" id="inside">
+      <div class="section__head reveal">
+        <p class="eyebrow">Inside the app</p>
+        <h2>What you actually get</h2>
+        <p class="section__lead">
+          Screenshots from the current release. Figures are obscured — nothing here is a
+          performance claim or an example of results you should expect.
+        </p>
+      </div>
+
+      <div class="shots">
+        <figure class="shot reveal">
+          <figcaption>
+            <h3>Dashboard</h3>
+            <p>Every portfolio at a glance — equity curve, risk statistics and status in one panel.</p>
+          </figcaption>
+          <img src="assets/shots/shot-dashboard.png" width="1600" height="850" loading="lazy" decoding="async"
+               alt="OptSight dashboard showing a portfolio's equity curve and risk statistic tiles" />
+        </figure>
+
+        <figure class="shot reveal">
+          <figcaption>
+            <h3>Optimize &amp; allocate</h3>
+            <p>Run the risk-parity optimizer or blend it with your own views, then review the target weights before anything leaves the app.</p>
+          </figcaption>
+          <img src="assets/shots/shot-portfolio.png" width="1600" height="853" loading="lazy" decoding="async"
+               alt="Portfolio page with target weights filled by the risk-parity optimizer" />
+        </figure>
+
+        <figure class="shot reveal">
+          <figcaption>
+            <h3>Your broker, your call</h3>
+            <p>Connect your own account and pick the environment. Orders route only where you point them — and only when you send them.</p>
+          </figcaption>
+          <img src="assets/shots/shot-broker.png" width="1600" height="836" loading="lazy" decoding="async"
+               alt="Broker page showing the active equity broker and its connection status" />
+        </figure>
+
+        <figure class="shot reveal">
+          <figcaption>
+            <h3>Crypto funding carry</h3>
+            <p>A market-neutral target book with a neutrality guard, and planned orders you preview before sending.</p>
+          </figcaption>
+          <img src="assets/shots/shot-crypto.png" width="1600" height="870" loading="lazy" decoding="async"
+               alt="Crypto page listing planned rebalance orders and the target funding-carry book" />
+        </figure>
+      </div>
+    </section>
+
+    <!-- ───────────────────────── PRICING ───────────────────────── -->
+    <section class="section section--alt" id="pricing">
+      <div class="section__head reveal">
+        <p class="eyebrow">Pricing</p>
+        <h2>Own it for once.</h2>
+        <p class="section__lead">Subscriptions are rent. OptSight is <strong>yours</strong> — pay once, own your copy, and run it on your own machine for good.</p>
+      </div>
+
+      <div class="price-card reveal">
+        <span class="badge">Founder's drop</span>
+        <div class="price-card__head">
+          <span class="logo-mark"></span>
+          <span>OptSight Desktop</span>
+        </div>
+        <!-- PLACEHOLDER PRICE: launch €39 / anchor €59 — confirm finals before launch -->
+        <div class="price">
+          <span class="price__was">€59</span>
+          <span class="price__amount" data-price>€39</span>
+          <span class="price__period">one-time</span>
+        </div>
+        <p class="price__drop">Founder's pricing · first 100 licenses</p>
+        <div class="price-devices" aria-label="One license activates on two machines">
+          <span class="price-devices__icons" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="0.5"/><path d="M9 20h6M12 16v4"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="14" height="9" rx="0.5"/><path d="M2.5 18h19l-1.4-2.4H3.9z"/></svg>
+          </span>
+          <span class="price-devices__label">License for two machines</span>
+        </div>
+        <ul class="ticks ticks--center">
+          <li>Windows &amp; macOS installer</li>
+          <li>All capabilities included</li>
+          <li>Activate on two devices — e.g. desktop &amp; laptop</li>
+          <li>Automatic updates</li>
+          <li>Runs fully on your machine</li>
+        </ul>
+        <!-- PLACEHOLDER: replace href with the checkout link (Gumroad / Lemon Squeezy / Stripe) -->
+        <a href="#" class="btn btn--primary btn--block" data-cta="buy">Claim your license</a>
+        <p class="price-card__fine">Secure checkout · instant download after purchase</p>
+        <p class="price-card__fine">All sales final — see <a href="#legal">Legal</a></p>
+      </div>
+    </section>
+
+    <!-- ───────────────────────── LEGAL ───────────────────────── -->
+    <!-- Single canonical URL for Terms, Privacy and Refunds — link this
+         anchor (https://opt-sight.com/#legal) from the checkout, the product
+         description, and the in-app activation screen. -->
+    <section class="section" id="legal">
+      <div class="section__head reveal">
+        <p class="eyebrow">Legal</p>
+        <h2>Terms &amp; disclosures</h2>
+        <p class="section__lead">
+          Please read this before you buy or use OptSight. Purchasing a licence and using the
+          software means you accept these terms.
+        </p>
+      </div>
+
+      <div class="legal reveal">
+        <p class="legal__meta"><span>Version 1.0</span><span>Effective 31 July 2026</span></p>
+
+        <article class="legal__block">
+          <h3>1 · Educational and informational use only</h3>
+          <p>
+            OptSight (the “Software”) is designed for educational and informational purposes
+            only. Recommendations, valuations, optimisations, statistics, rankings and
+            portfolio allocations generated by the Software <strong>do not constitute financial,
+            investment, legal or tax advice</strong>, and are neither an offer nor a
+            solicitation to buy or sell any security or other instrument. OptSight is not a
+            broker, exchange, custodian or investment adviser, and never takes custody of your
+            funds or assets. You alone are responsible for every investment decision you make
+            and for judging whether any strategy suits your circumstances. Consider consulting
+            a licensed professional before acting.
+          </p>
+        </article>
+
+        <article class="legal__block">
+          <h3>2 · No warranty and limitation of liability</h3>
+          <p>
+            The Software is provided <strong>“as is”</strong> and “as available”, without
+            warranty of any kind, express or implied, including but not limited to warranties
+            of merchantability, fitness for a particular purpose, accuracy, or
+            non-infringement. Under no circumstances shall the developer be liable for any
+            direct, indirect, incidental, special or consequential financial losses, lost
+            profits, missed opportunities, trading losses, or data loss or corruption
+            resulting from the use of — or the inability to use — the Software or any API
+            integration.
+          </p>
+          <p>
+            Investing involves risk, including the possible loss of capital.
+            <strong>Past performance does not indicate future results.</strong> Nothing shown,
+            simulated or described in the Software or on this website is a prediction or a
+            promise of future performance.
+          </p>
+          <p class="legal__note">
+            Nothing in these terms limits or excludes liability that cannot lawfully be
+            limited, or affects your mandatory statutory rights as a consumer.
+          </p>
+        </article>
+
+        <article class="legal__block">
+          <h3>3 · Third-party brokers, exchanges and data providers</h3>
+          <p>
+            The Software connects to external broker, exchange and market-data APIs using
+            credentials that you supply and control. The developer is
+            <strong>not responsible for API downtime, delayed, partial or failed execution,
+            incorrect or stale data, slippage, fees, rejected or duplicated orders, or
+            security breaches occurring on third-party platforms.</strong> Your relationship
+            with each broker, exchange and data provider is governed by that provider’s own
+            terms; complying with them — and verifying every order in your broker’s own
+            interface — is your responsibility.
+          </p>
+          <p>
+            Automated order placement (“auto-execute”) is opt-in, disabled by default, and
+            subject to in-app guards including a paper-trading default and a mandatory
+            paper-trading period. Enabling it, and the orders that follow, remain your
+            decision and your responsibility.
+          </p>
+        </article>
+
+        <article class="legal__block">
+          <h3>4 · Licence and unmodified use</h3>
+          <p>
+            Your purchase grants a personal, non-transferable licence to use the Software
+            <strong>in its original, unmodified form</strong>, activated on up to the number of
+            devices stated at checkout. Reverse engineering, disassembly, tampering with or
+            circumventing licensing or security controls, and redistributing
+            or reselling the Software or licence keys are strictly prohibited — except to the
+            extent such restriction is prohibited by applicable mandatory law.
+          </p>
+          <p>
+            The developer accepts <strong>zero liability</strong> for losses, erroneous API
+            calls, unintended orders or unexpected behaviour arising from unauthorised,
+            cracked, patched or otherwise modified copies of the Software, and provides no
+            support for them.
+          </p>
+        </article>
+
+        <article class="legal__block">
+          <h3>5 · Purchase, delivery and refunds</h3>
+          <p>
+            <strong>All sales of digital licences are final and non-refundable</strong> once
+            the licence key has been generated or accessed. By completing your purchase you
+            expressly consent to immediate delivery of the Software and acknowledge that you
+            thereby lose any applicable statutory right of withdrawal or cooling-off period.
+          </p>
+          <p>
+            This does not affect your statutory rights where the Software is faulty or
+            materially not as described: in that case you are entitled to repair or
+            replacement and, if the defect cannot be remedied within a reasonable time, to a
+            full or partial refund. Payments are processed by Lemon Squeezy, which acts as
+            Merchant of Record and issues your invoice.
+          </p>
+        </article>
+
+        <article class="legal__block">
+          <h3>6 · Privacy</h3>
+          <p>
+            OptSight runs on your machine. There is no account and no cloud sync; your
+            holdings, models, chats and settings are stored in a local database on your
+            computer. The Software contains <strong>no analytics, tracking or usage
+            telemetry</strong>, and your portfolio data is never transmitted to the developer.
+          </p>
+          <p>
+            Outbound connections happen only for: licence activation and periodic validation
+            (your licence key and a device identifier are sent to Lemon Squeezy); update
+            checks; market and fundamental data requests made with your own API credentials to
+            the providers you configure; broker connections you set up; and opt-in web lookups
+            you trigger yourself in the AI co-pilot, which send only your typed question — not
+            your portfolio.
+          </p>
+        </article>
+
+        <article class="legal__block">
+          <h3>7 · Contact and governing law</h3>
+          <p>
+            <!-- Licensor is a natural person until an entity exists; update this line and
+                 §5's Merchant-of-Record wording if that changes. -->
+            OptSight is developed and licensed by <strong>Tomas Prochazka</strong>, an
+            individual resident in the Czech Republic. Support, questions and defect reports:
+            <a href="mailto:optsight@gmail.com">optsight@gmail.com</a>.
+          </p>
+          <p>
+            These terms are governed by the laws of the Czech Republic, without prejudice to
+            any mandatory consumer protections of your country of residence. If any provision
+            is found unenforceable, the remainder stays in force.
+          </p>
+        </article>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ───────────────────────── FOOTER ───────────────────────── -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <span class="logo-mark"></span>
+        <span class="brand__name">Opt<span class="brand__accent">Sight</span></span>
+      </div>
+      <p class="footer__disclaimer">
+        For informational purposes only. Not financial advice. OptSight is portfolio tooling —
+        not a broker, exchange, or investment adviser. Investing involves risk, including the
+        possible loss of capital.
+      </p>
+      <p class="footer__links">
+        <a href="#legal">Terms &amp; disclosures</a>
+        <a href="#legal">Privacy</a>
+        <a href="#legal">Refunds</a>
+        <a href="mailto:optsight@gmail.com">optsight@gmail.com</a>
+      </p>
+      <p class="footer__copy">© <span data-year>2026</span> OptSight. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- tiny toast for unwired placeholder CTAs -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="fx-core.js" defer></script>
+  <script src="main.js" defer></script>
+  <script src="viz.js" defer></script>
+</body>
+</html>
