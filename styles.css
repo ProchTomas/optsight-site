@@ -456,14 +456,6 @@ img, svg { display: block; }
   border-radius: var(--radius);
 }
 .price { display: flex; align-items: baseline; justify-content: center; gap: 10px; margin-bottom: 6px; }
-.price__was {
-  font-family: var(--font-mono);
-  font-size: 1.15rem;
-  color: var(--muted);
-  text-decoration: line-through;
-  text-decoration-color: var(--danger);
-  align-self: center;
-}
 .price__amount { font-family: var(--font-mono); font-size: 3rem; font-weight: 600; color: var(--text-primary); }
 .price__period { font-family: var(--font-mono); font-size: 0.85rem; color: var(--muted); }
 .price__drop {
