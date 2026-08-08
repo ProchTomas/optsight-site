@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your OptSight licence</title>
+  <meta name="robots" content="noindex" />
+
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <meta name="theme-color" content="#070910" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .receipt { max-width: 640px; margin: 0 auto; padding: 96px 20px 64px; }
+    .receipt h1 { font-size: 1.75rem; margin: 0 0 8px; }
+    .receipt__sub { color: #9aa4b8; margin: 0 0 32px; }
+
+    .keybox {
+      background: #111318; border: 1px solid #262b34; border-radius: 2px;
+      padding: 20px; margin: 24px 0;
+    }
+    .keybox__label {
+      font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: #5a6478; margin: 0 0 10px;
+    }
+    .keybox__key {
+      font-family: 'IBM Plex Mono', monospace; font-size: 1.05rem; font-weight: 600;
+      color: #f2f4f8; word-break: break-all; user-select: all; line-height: 1.5;
+    }
+    .keybox__actions { margin-top: 16px; display: flex; gap: 10px; align-items: center; }
+
+    .status { display: flex; gap: 10px; align-items: center; color: #9aa4b8; }
+    .spinner {
+      width: 14px; height: 14px; border: 2px solid #2a3040; border-top-color: #c87533;
+      border-radius: 50%; animation: spin 0.8s linear infinite; flex: none;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @media (prefers-reduced-motion: reduce) { .spinner { animation: none; } }
+
+    .note { color: #9aa4b8; font-size: 0.92rem; line-height: 1.6; }
+    .note strong { color: #d7dce6; }
+    .err { color: #ff6b6b; }
+    .copied { color: #00d084; font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+
+  <div class="fx" aria-hidden="true">
+    <div class="fx__glow"></div>
+    <div class="fx__grain"></div>
+    <div class="fx__vignette"></div>
+  </div>
+
+  <main class="receipt">
+    <a class="brand" href="/" aria-label="OptSight home" style="margin-bottom:40px;display:inline-flex">
+      <span class="brand__name">Opt<span class="brand__accent">Sight</span></span>
+    </a>
+
+    <h1>Payment received</h1>
+    <p class="receipt__sub">Thank you. Your licence is below — a copy is also on its way by email.</p>
+
+    <div class="keybox">
+      <p class="keybox__label">Licence key</p>
+
+      <!-- Populated by JS. Starts as a status line so a buyer whose webhook is
+           still in flight sees progress rather than an empty box. -->
+      <div id="key-area">
+        <div class="status">
+          <span class="spinner"></span>
+          <span id="status-text">Issuing your licence…</span>
+        </div>
+      </div>
+
+      <div class="keybox__actions" id="actions" hidden>
+        <button class="btn btn--primary btn--sm" id="copy">Copy key</button>
+        <span class="copied" id="copied" hidden>Copied</span>
+      </div>
+    </div>
+
+    <p class="note">
+      <strong>Next:</strong> download the installer from
+      <a href="/#download">opt-sight.com</a>, run it, and paste this key when the app
+      asks. It activates on up to <strong>two machines</strong> — you can move it by
+      deactivating one from inside the app.
+    </p>
+
+    <p class="note" style="margin-top:20px">
+      Keep the email. If it hasn't arrived in a few minutes, check spam, then contact
+      <a href="mailto:contact@opt-sight.com">contact@opt-sight.com</a> quoting your
+      payment date — your key is recoverable.
+    </p>
+  </main>
+
+  <script>
+    // The success redirect and Stripe's webhook race each other, and the redirect
+    // usually wins. So the endpoint answers 202 "pending" until the licence
+    // exists, and we poll rather than showing an error the buyer would panic at.
+    const WORKER = "https://optsight-checkout.optsight.workers.dev"; // set at deploy
+
+    const params    = new URLSearchParams(location.search);
+    const sessionId = params.get("session_id");
+
+    const keyArea    = document.getElementById("key-area");
+    const statusText = document.getElementById("status-text");
+    const actions    = document.getElementById("actions");
+
+    const MAX_ATTEMPTS = 20;   // ~60s total, comfortably past a slow webhook
+    const INTERVAL_MS  = 3000;
+
+    function showKey(key) {
+      keyArea.innerHTML = '<div class="keybox__key"></div>';
+      keyArea.firstChild.textContent = key;   // textContent, never innerHTML
+      actions.hidden = false;
+
+      document.getElementById("copy").addEventListener("click", async () => {
+        await navigator.clipboard.writeText(key);
+        const flag = document.getElementById("copied");
+        flag.hidden = false;
+        setTimeout(() => { flag.hidden = true; }, 2000);
+      });
+    }
+
+    function showError(msg) {
+      keyArea.innerHTML = '<p class="err"></p>';
+      keyArea.firstChild.textContent = msg;
+    }
+
+    async function poll(attempt = 0) {
+      try {
+        const res  = await fetch(`${WORKER}/license?session_id=${encodeURIComponent(sessionId)}`);
+        const data = await res.json();
+
+        if (res.status === 200 && data.key) return showKey(data.key);
+
+        if (res.status === 202) {
+          if (attempt >= MAX_ATTEMPTS) {
+            // Never claim failure — the licence almost certainly exists by now
+            // and the email is the backstop. Panicking the buyer is worse.
+            return showError(
+              "Still issuing. Your key will arrive by email shortly — no need to pay again."
+            );
+          }
+          statusText.textContent =
+            attempt < 3 ? "Issuing your licence…" : "Almost there…";
+          return setTimeout(() => poll(attempt + 1), INTERVAL_MS);
+        }
+
+        showError(data.error === "not paid"
+          ? "This payment has not completed yet."
+          : "We couldn't find this purchase. Please contact contact@opt-sight.com.");
+      } catch {
+        if (attempt >= MAX_ATTEMPTS) {
+          return showError("Network problem. Your key will still arrive by email.");
+        }
+        setTimeout(() => poll(attempt + 1), INTERVAL_MS);
+      }
+    }
+
+    if (!sessionId) {
+      showError("No purchase reference in this link.");
+    } else {
+      poll();
+    }
+  </script>
+</body>
+</html>
